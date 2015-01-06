@@ -7,21 +7,31 @@
 #include <cv.h> 
 #include <highgui.h> 
 #include <iostream>
+
+using namespace cv;
+using namespace std;
+
 #include "main.h"
 #include "enh.h"
+#include "harris.h"
 
 int main(int argc, char** argv) {
-		  cv::Mat input_image;
+		  Mat input_image;
 
-		  input_image = cv::imread(LENNA_IMAGE_PATH, CV_LOAD_IMAGE_COLOR);
+		  input_image = imread(LENNA_IMAGE_PATH, CV_LOAD_IMAGE_COLOR);
 
-		  cv::imshow("Lenna Original", input_image);
+		  imshow("Lenna Original", input_image);
 
-		  cv::Mat enhanced_image = apply_gaussian_filtering(input_image,
-																			 5.0, 5);
+		  Mat enhanced_image = apply_gaussian_filtering(input_image, 5.0, 5);
 
-		  cv::imshow("Lenna Enhanced", enhanced_image);
+		  imshow("Lenna Enhanced", enhanced_image);
 
-		  cv::imwrite("./output_images/Lenna_output.jpg", enhanced_image);
-		  cv::waitKey(0);
+		  imwrite("./output_images/Lenna_enhanced.jpg", enhanced_image);
+
+		  Mat corners_detected = detectCorners(input_image); 
+
+		  imshow("Lenna Corners Detected", corners_detected);
+		  imwrite("./output_images/Lenna_cornerdetected.jpg", corners_detected);
+
+		  waitKey(0);
 }

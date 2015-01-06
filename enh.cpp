@@ -5,28 +5,31 @@
 
 #include <cv.h> 
 
-cv::Mat apply_gaussian_filtering(const cv::Mat image,
+using namespace cv;
+using namespace std;
+
+Mat apply_gaussian_filtering(const Mat image,
 					 						const float std_dev,
 											const int filter_size) {
-		  cv::Mat input_yCrCb, result_yCrCb, result_rgb;
-		  std::vector<cv::Mat> yCrCb_channels;
+		  Mat input_yCrCb, result_yCrCb, result_rgb;
+		  vector<Mat> yCrCb_channels;
 
 		  // convert RGB image into YCrCb format
-		  cv::cvtColor(image, input_yCrCb, CV_BGR2YCrCb);
+		  cvtColor(image, input_yCrCb, CV_BGR2YCrCb);
 
 		  // split the YCrCb image into its channels
-		  cv::split(input_yCrCb, yCrCb_channels);
+		  split(input_yCrCb, yCrCb_channels);
 
 		  // apply Gaussian filtering on the Y channel
-		  cv::GaussianBlur(yCrCb_channels[0], yCrCb_channels[0],
-								 cv::Size(filter_size, filter_size),
-								 std_dev);
+		  GaussianBlur(yCrCb_channels[0], yCrCb_channels[0],
+					  		Size(filter_size, filter_size),
+					  		std_dev);
 
 		  // merge resulting YCrCb channels into an image
-		  cv::merge(yCrCb_channels, result_yCrCb);
+		  merge(yCrCb_channels, result_yCrCb);
 
 		  // convert resulting YCrCb image into RGB format
-		  cv::cvtColor(result_yCrCb, result_rgb, CV_YCrCb2BGR);
+		  cvtColor(result_yCrCb, result_rgb, CV_YCrCb2BGR);
 
 		  return result_rgb;
 }

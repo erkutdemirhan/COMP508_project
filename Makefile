@@ -1,5 +1,5 @@
 all:
-	g++ main.cpp enh.cpp -o cornerdet `pkg-config --libs --cflags opencv` 
+	g++ main.cpp enh.cpp harris.cpp -o cornerdet `pkg-config --libs --cflags opencv` 
 	mkdir ./output_images
 clean:
 	rm -f cornerdet

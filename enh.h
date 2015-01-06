@@ -8,7 +8,7 @@
 // applies gaussian filtering on given input image, using standard deviation
 // parameter std_dev, and filter size parameter filter_size.
 // Returns resulting image of the gaussian filter
-cv::Mat apply_gaussian_filtering(const cv::Mat image,
-					 					   const float std_dev,
-											const int filter_size);
+Mat apply_gaussian_filtering(const Mat image,
+									  const float std_dev,
+								     const int filter_size);
 #endif
