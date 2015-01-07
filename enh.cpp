@@ -33,6 +33,20 @@ Mat apply_gaussian_filtering(const Mat image,
 
 		  return result_rgb;
 }
+
+Mat apply_histeq(const Mat rgb_image) {
+		  // convert input image into grayscale
+		  Mat input_graysc;
+		  cvtColor(rgb_image, input_graysc, CV_BGR2GRAY);
+
+		  // apply histogram equalization
+		  Mat output_graysc;
+		  equalizeHist(input_graysc, output_graysc);
+
+		  return output_graysc;
+}
+
+		 
 		  
 
 

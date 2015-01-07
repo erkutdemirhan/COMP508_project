@@ -9,18 +9,14 @@ using namespace cv;
 
 #include "harris.h"
 
-// This function takes an rgb image as input, and returns it in grayscale format
+// This function takes a grayscale image as input, and returns it in grayscale format
 // with circles that show detected corners
-Mat detectCorners(Mat rgb_image) {
+Mat detectCorners(const Mat image_gs) {
 
-		  Mat graysc_image;
 		  Mat dst, dst_norm, dst_norm_scaled;
 
-		  // convert input image into grayscale image
-		  cvtColor(rgb_image, graysc_image, CV_BGR2GRAY);
-
 		  // Detecting corners
-		  cornerHarris(graysc_image, dst, BLOCK_SIZE, APERTURE_SIZE, K, BORDER_DEFAULT);
+		  cornerHarris(image_gs, dst, BLOCK_SIZE, APERTURE_SIZE, K, BORDER_DEFAULT);
 
 		  // Normalizing
 		  normalize(dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());

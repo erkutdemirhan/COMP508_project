@@ -12,8 +12,9 @@
 #define K 0.04
 
 // Threshold for the Harris Operator
-#define THRESHOLD 200
+#define THRESHOLD 150
 
-Mat detectCorners(Mat rgb_image);
+// Detects and shows corners in given grayscale input image
+Mat detectCorners(const Mat image_gs);
 
 #endif

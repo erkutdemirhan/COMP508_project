@@ -48,13 +48,13 @@ int main(int argc, char** argv) {
 
 		  imshow(image_name+" Original", input_image);
 
-		  Mat enhanced_image = apply_gaussian_filtering(input_image, 5.0, 5);
+		  Mat enhanced_image = apply_histeq(input_image);
 
 		  imshow(image_name+" Enhanced", enhanced_image);
 
 		  imwrite("./output_images/"+image_name+"_enhanced.jpg", enhanced_image);
 
-		  Mat corners_detected = detectCorners(input_image); 
+		  Mat corners_detected = detectCorners(enhanced_image); 
 
 		  imshow(image_name+" Corners Detected", corners_detected);
 		  imwrite("./output_images/"+image_name+"_cornerdetected.jpg", corners_detected);

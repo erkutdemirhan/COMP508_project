@@ -11,4 +11,8 @@
 Mat apply_gaussian_filtering(const Mat image,
 									  const float std_dev,
 								     const int filter_size);
+
+// applies histogram equalization on the grayscale version of the given rgb image
+// returns enhanced grayscale image
+Mat apply_histeq(const Mat rgb_image); 
 #endif
