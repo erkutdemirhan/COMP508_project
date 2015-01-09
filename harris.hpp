@@ -3,8 +3,11 @@
 //
 // Includes functions and parameters to detect corners using Harris detector
 
-#ifndef HARRIS_H
-#define HARRIS_H
+#ifndef HARRIS_HPP
+#define HARRIS_HPP
+
+#include <cv.h>
+#include <vector>
 
 // Detector parameters
 #define BLOCK_SIZE 2
@@ -15,6 +18,6 @@
 #define THRESHOLD 150
 
 // Detects and shows corners in given grayscale input image
-Mat detectCorners(const Mat image_gs);
-
+//cv::Mat detectCorners(const cv::Mat image_gs);
+std::vector<cv::Point> detectCorners(const cv::Mat image_gs);
 #endif

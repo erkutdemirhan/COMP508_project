@@ -54,7 +54,13 @@ int main(int argc, char** argv) {
 
 	imwrite("./output_images/"+image_name+"_enhanced.jpg", enhanced_image);
 
-	Mat corners_detected = detectCorners(enhanced_image); 
+	Mat corners_detected = input_image.clone();
+	vector<Point> corners = detectCorners(enhanced_image);
+
+	// Drawing a circle around corners
+	for(vector<Point>::iterator it = corners.begin(); it != corners.end(); it++) {
+		circle(corners_detected, *it, 5, Scalar(0), 2, 8, 0);		
+	}
 
 	imshow(image_name+" Corners Detected", corners_detected);
 	imwrite("./output_images/"+image_name+"_cornerdetected.jpg", corners_detected);
