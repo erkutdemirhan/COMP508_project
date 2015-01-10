@@ -8,11 +8,26 @@
 #include <highgui.h> 
 #include <iostream>
 
+//#include <Eigen/Geometry>
+
 using namespace cv;
 using namespace std;
 
 #include "enh.hpp"
 #include "harris.hpp"
+
+//int main() {
+//	Eigen::Vector2d e1(1,0);
+//	Eigen::Rotation2D<double> rm(M_PI_2);
+//	cout << rm*e1;
+//	cout << endl;
+//	Eigen::Matrix2d r;
+//	r << 0, -1, 1, 0;
+//	cout << r;
+//	cout << endl;
+//	cout << r * e1;
+//	return 0;
+//}
 
 int main(int argc, char** argv) {
 	Mat input_image;
@@ -31,11 +46,11 @@ int main(int argc, char** argv) {
 		 cerr << image_path << endl;
 		 exit(1);
 	}
-		  
+
 	// get input image name
 	string image_name = image_path;
 	unsigned last_slash_index = image_name.find_last_of("/");
-		  
+
 	if(last_slash_index > 0 && last_slash_index < image_name.length()) {
 		 image_name = image_name.substr(last_slash_index+1);
 	}
@@ -59,7 +74,7 @@ int main(int argc, char** argv) {
 
 	// Drawing a circle around corners
 	for(vector<Point>::iterator it = corners.begin(); it != corners.end(); it++) {
-		circle(corners_detected, *it, 5, Scalar(0), 2, 8, 0);		
+		circle(corners_detected, *it, 5, Scalar(0), 2, 8, 0);
 	}
 
 	imshow(image_name+" Corners Detected", corners_detected);
