@@ -77,6 +77,9 @@ int main(int argc, char** argv) {
 		circle(corners_detected, *it, 5, Scalar(0), 2, 8, 0);
 	}
 
+	cv::Scalar color = cv::Scalar(0, 255, 0);
+	corners_detected = drawBoundary(corners_detected, corners, color);
+
 	imshow(image_name+" Corners Detected", corners_detected);
 	imwrite("./output_images/"+image_name+"_cornerdetected.jpg", corners_detected);
 
