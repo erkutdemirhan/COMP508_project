@@ -7,6 +7,43 @@
 
 #include "helperMethods.hpp"
 
+
+void purifyCorners(std::vector<cv::Point>& original, double distance) {
+	std::vector<cv::Point> result;
+
+	int* check  = 0;
+	check = new int[original.size()];
+	for (int i = 0; i < original.size(); i++) {
+		check[i] = 0;
+	}
+
+	int current = 0;
+	for (unsigned int i = 0; i < original.size() - 1; i++) {
+		current = 0;
+		for (unsigned int j = i+1; j < original.size(); j++) {
+			if (check[j] > 0) {
+				continue;
+			}
+			int distX = (original.at(i).x - original.at(j).x);
+			int distY = (original.at(i).y - original.at(j).y);
+			if ((distX * distX + distY * distY) < distance * distance) {
+				current++;
+				check[j] = current;
+			}
+		}
+		check[i] = current;
+	}
+
+	for (int i = 0; i < original.size(); i++) {
+		if (check[i] == 0) {
+			result.push_back(original.at(i));
+		}
+	}
+
+	original = result;
+}
+
+
 // The corner comparison operator for sorting in ascending order
 bool cornerSorterAscending(cv::Point pi, cv::Point pj) {
 	if (pi.y < pj.y) {
@@ -23,6 +60,25 @@ bool cornerSorterAscending(cv::Point pi, cv::Point pj) {
 	}
 }
 
+
+// Using draws convex hull of given coordinate points into given input image
+// with given color value, and returns the resulting it
+cv::Mat drawBoundary(const cv::Mat input_image,
+					 		const std::vector<cv::Point> points,
+							const cv::Scalar color) {
+		  // Finds the convex hull object from given input points
+		  std::vector<std::vector<cv::Point> > hull(1);
+		  cv::convexHull(points, hull[0], false, false);
+
+		  // Draws the convex hull into a copy of the input image, with given
+		  // color values
+		  cv::Mat result_image = input_image.clone();
+		  cv::drawContours(result_image, hull, 0, color, 1, 8);
+
+		  return result_image;
+}
+
+
 // Granulates the given vector coordinates according to the granularity parameter
 //	Vector result: the result vector holding the granulated coordinates
 //	Vector v: the vector to be granulated
@@ -31,12 +87,6 @@ void granulate(Eigen::Vector2i& result, const Eigen::Vector2d& v, const double g
 	result(0) = (int) round((double) v(0) / granulationRate);
 	result(1) = (int) round((double) v(1) / granulationRate);
 }
-
-
-//void granulate(Eigen::Vector2i& result, const Eigen::Vector2d& v, const double granulationRate) {
-//	result(0) = (int) round((double) v(0) / granulationRate);
-//	result(1) = (int) round((double) v(1) / granulationRate);
-//}
 
 // Finds the euclidian distance between two 2d vectors
 double euclidianDistance(const Eigen::Vector2d& a, const Eigen::Vector2d& b) {
@@ -57,3 +107,6 @@ void findTransformedCoordinates(const Eigen::Vector2d& e1, const Eigen::Vector2d
 	newBasis.col(1) = e2;
 	result = newBasis.inverse() * ((coordinates - displacement) / scalingFactor);
 }
+
+
+

@@ -8,8 +8,7 @@
 #ifndef HASHENTRYMODEL_HPP_
 #define HASHENTRYMODEL_HPP_
 
-#include <vector>
-#include <cv.h>
+#include <ostream>
 
 class HashEntryModel {
 private:

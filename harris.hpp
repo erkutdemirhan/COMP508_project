@@ -24,11 +24,4 @@
 void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners);
 
 void detectCorners2(const cv::Mat image_gs, std::vector<cv::Point>& corners);
-
-// Using draws convex hull of given coordinate points into given input image 
-// with given color value, and returns the resulting it
-cv::Mat drawBoundary(const cv::Mat input_image, 
-					 		const std::vector<cv::Point> points,
-							const cv::Scalar color);
-
 #endif
