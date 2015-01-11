@@ -28,6 +28,7 @@ void matching(std::vector<cv::Point>& sceneCorners, Multimap2D& modelMap, std::v
 				Eigen::Matrix2d rotation90ccw;
 				rotation90ccw << 0, -1, 1, 0;
 				Eigen::Vector2d e2 = rotation90ccw * e1;
+//				std::cout << "Scene granulate:" << std::endl;
 				for (unsigned int it = 0; it < sortedCorners.size(); it++) {
 					Eigen::Vector2i result = Eigen::Vector2i::Zero();
 					Eigen::Vector2d transformed = Eigen::Vector2d::Zero();

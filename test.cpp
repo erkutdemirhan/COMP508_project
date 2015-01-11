@@ -134,18 +134,23 @@ int main(int argc, char** argv) {
 	imshow(scene_image_name+" Corners Detected Scene", corners_detected);
 	imwrite("./output_images/"+scene_image_name+"_cornerdetected.jpg", corners_detected);
 
-	///////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
 // Outputs the matching corner pairs into log.txt
-//	for (std::vector<std::vector<std::pair<unsigned int, unsigned int> > >::iterator it =
-//			candidateMatches.begin(); it != candidateMatches.end(); it++) {
-//		ofile << "Solution no: " << it - candidateMatches.begin() <<  "	Size: " << it->size() << endl;
-//		for (std::vector<std::pair<unsigned int, unsigned int> >::iterator itLocal = it->begin(); itLocal != it->end(); itLocal++) {
-//			ofile << itLocal->first << " - " << itLocal->second << "	";
-//		}
-//		ofile << endl;
+	for (std::vector<std::vector<std::pair<unsigned int, unsigned int> > >::iterator it =
+			candidateMatches.begin(); it != candidateMatches.end(); it++) {
+		ofile << "Solution no: " << it - candidateMatches.begin() <<  "	Size: " << it->size() << endl;
+		for (std::vector<std::pair<unsigned int, unsigned int> >::iterator itLocal = it->begin(); itLocal != it->end(); itLocal++) {
+			ofile << itLocal->first << " - " << itLocal->second << "	";
+		}
+		ofile << endl;
+	}
+
+	ofile.close();
+
+//	if (candidateMatches.empty()) {
+//		cout << "NO MATCHING OBJECT FOUND!" << endl;
+//		return 0;
 //	}
-//
-//	ofile.close();
 
 	int max_size, max_index;
 	max_size = -1;
@@ -160,6 +165,7 @@ int main(int argc, char** argv) {
 	std::vector<cv::Point> matchingCorners;
 	if (max_index == -1) {
 		cout << "NO MATCHING OBJECT FOUND!" << endl;
+//		return 0;
 	}
 	else {
 		for (std::vector<std::pair<unsigned int, unsigned int> >::iterator itLocal = candidateMatches.at(max_index).begin(); itLocal != candidateMatches.at(max_index).end(); itLocal++) {

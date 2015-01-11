@@ -73,7 +73,7 @@ cv::Mat drawBoundary(const cv::Mat input_image,
 		  // Draws the convex hull into a copy of the input image, with given
 		  // color values
 		  cv::Mat result_image = input_image.clone();
-		  cv::drawContours(result_image, hull, 0, color, 1, 8);
+		  cv::drawContours(result_image, hull, 0, color, 2, 8);
 
 		  return result_image;
 }
@@ -86,6 +86,8 @@ cv::Mat drawBoundary(const cv::Mat input_image,
 void granulate(Eigen::Vector2i& result, const Eigen::Vector2d& v, const double granulationRate) {
 	result(0) = (int) round((double) v(0) / granulationRate);
 	result(1) = (int) round((double) v(1) / granulationRate);
+//	std::cout << result.transpose();
+//	std::cout << std::endl;
 }
 
 // Finds the euclidian distance between two 2d vectors
