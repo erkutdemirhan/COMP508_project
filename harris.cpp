@@ -38,7 +38,8 @@ void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners) {
     cv::Mat dst, dst_norm, dst_norm_scaled;
 
   	// Detecting corners
-  	cornerHarris(image_gs, dst, BLOCK_SIZE, APERTURE_SIZE, K, cv::BORDER_DEFAULT);
+  	cornerHarris(image_gs, dst, BLOCK_SIZE, APERTURE_SIZE, 
+			  		 HARRIS_FREE_PARAMETER, cv::BORDER_DEFAULT);
 
     // Normalizing
     normalize(dst, dst_norm, 0, 255, cv::NORM_MINMAX, CV_32FC1, cv::Mat());
@@ -51,6 +52,21 @@ void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners) {
             }
         }
     }
+}
+
+void detectCorners2(const cv::Mat image_gs, std::vector<cv::Point>& corners) {
+
+		  // Parameters 
+		  int maxCorners = 100; // Maximum number of corners to return
+		  double qualityLevel = 0.1; // Minimal accepted quality of image corners
+		  double minDistance = 5.0; // Minimum possible Euclidean distance between the returned corners
+		  int blockSize = 3; // Size of an average block for computing a derivative covariation matrix
+		  							// for each pixel neighborhood
+		  bool useHarrisDetector = false;
+		  double k = 0.04; // Free parameter to be used in Harris Detector
+
+		  cv::goodFeaturesToTrack(image_gs, corners, maxCorners, qualityLevel, 
+										  minDistance, image_gs, blockSize, useHarrisDetector, k);
 }
 
 cv::Mat drawBoundary(const cv::Mat input_image, 

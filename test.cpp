@@ -58,11 +58,14 @@ int main(int argc, char** argv) {
 
 	Mat corners_detected = input_image.clone();
 	vector<Point> corners; 
-	detectCorners(enhanced_image, corners);
+   //	detectCorners(enhanced_image, corners);
+	detectCorners2(enhanced_image, corners);
+
+	std::cout << "number of corners: " << corners.size() << std::endl;
 
 	// Drawing a circle around corners
 	for(vector<Point>::iterator it = corners.begin(); it != corners.end(); it++) {
-		circle(corners_detected, *it, 5, Scalar(0), 2, 8, 0);
+		circle(corners_detected, *it, 5, Scalar(0, 0, 255), 2, 8, 0);
 	}
 
 	cv::Scalar color = cv::Scalar(0, 255, 0);
