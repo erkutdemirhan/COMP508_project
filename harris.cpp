@@ -32,11 +32,10 @@
 
 
 
-// This function takes a grayscale image as input, and returns the coordinates of the corners in the image in the form of a vector
-std::vector<cv::Point> detectCorners(const cv::Mat image_gs) {
+// This function takes a grayscale image as input, and calculates the coordinates of the corners in the image in the form of a vector
+void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners) {
 
     cv::Mat dst, dst_norm, dst_norm_scaled;
-	std::vector<cv::Point> corners;
 
   	// Detecting corners
   	cornerHarris(image_gs, dst, BLOCK_SIZE, APERTURE_SIZE, K, cv::BORDER_DEFAULT);
@@ -52,8 +51,6 @@ std::vector<cv::Point> detectCorners(const cv::Mat image_gs) {
             }
         }
     }
-
-    return corners;
 }
 
 cv::Mat drawBoundary(const cv::Mat input_image, 

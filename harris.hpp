@@ -19,7 +19,7 @@
 
 // Detects and shows corners in given grayscale input image
 //cv::Mat detectCorners(const cv::Mat image_gs);
-std::vector<cv::Point> detectCorners(const cv::Mat image_gs);
+void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners);
 
 // Using draws convex hull of given coordinate points into given input image 
 // with given color value, and returns the resulting it

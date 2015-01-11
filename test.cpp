@@ -16,19 +16,6 @@ using namespace std;
 #include "enh.hpp"
 #include "harris.hpp"
 
-//int main() {
-//	Eigen::Vector2d e1(1,0);
-//	Eigen::Rotation2D<double> rm(M_PI_2);
-//	cout << rm*e1;
-//	cout << endl;
-//	Eigen::Matrix2d r;
-//	r << 0, -1, 1, 0;
-//	cout << r;
-//	cout << endl;
-//	cout << r * e1;
-//	return 0;
-//}
-
 int main(int argc, char** argv) {
 	Mat input_image;
 	string image_path(argv[1]);
@@ -70,7 +57,8 @@ int main(int argc, char** argv) {
 	imwrite("./output_images/"+image_name+"_enhanced.jpg", enhanced_image);
 
 	Mat corners_detected = input_image.clone();
-	vector<Point> corners = detectCorners(enhanced_image);
+	vector<Point> corners; 
+	detectCorners(enhanced_image, corners);
 
 	// Drawing a circle around corners
 	for(vector<Point>::iterator it = corners.begin(); it != corners.end(); it++) {
