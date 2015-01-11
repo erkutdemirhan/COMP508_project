@@ -38,7 +38,7 @@ void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners) {
     cv::Mat dst, dst_norm, dst_norm_scaled;
 
   	// Detecting corners
-  	cornerHarris(image_gs, dst, BLOCK_SIZE, APERTURE_SIZE, K, cv::BORDER_DEFAULT);
+  	cornerHarris(image_gs, dst, BLOCK_SIZE, APERTURE_SIZE, KK, cv::BORDER_DEFAULT);
 
     // Normalizing
     normalize(dst, dst_norm, 0, 255, cv::NORM_MINMAX, CV_32FC1, cv::Mat());
@@ -51,21 +51,6 @@ void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners) {
             }
         }
     }
-}
-
-cv::Mat drawBoundary(const cv::Mat input_image, 
-					 		const std::vector<cv::Point> points,
-							const cv::Scalar color) {
-		  // Finds the convex hull object from given input points
-		  std::vector<std::vector<cv::Point> > hull(1);
-		  cv::convexHull(points, hull[0], false, false);
-
-		  // Draws the convex hull into a copy of the input image, with given 
-		  // color values
-		  cv::Mat result_image = input_image.clone();
-		  cv::drawContours(result_image, hull, 0, color, 1, 8);
-
-		  return result_image;
 }
 
 

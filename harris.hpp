@@ -12,7 +12,7 @@
 // Detector parameters
 #define BLOCK_SIZE 2
 #define APERTURE_SIZE 3
-#define K 0.04
+#define KK 0.04
 
 // Threshold for the Harris Operator
 #define THRESHOLD 150
@@ -21,10 +21,5 @@
 //cv::Mat detectCorners(const cv::Mat image_gs);
 void detectCorners(const cv::Mat image_gs, std::vector<cv::Point>& corners);
 
-// Using draws convex hull of given coordinate points into given input image 
-// with given color value, and returns the resulting it
-cv::Mat drawBoundary(const cv::Mat input_image, 
-					 		const std::vector<cv::Point> points,
-							const cv::Scalar color);
 
 #endif
