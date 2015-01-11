@@ -13,7 +13,7 @@ void purifyCorners(std::vector<cv::Point>& original, double distance) {
 
 	int* check  = 0;
 	check = new int[original.size()];
-	for (int i = 0; i < original.size(); i++) {
+	for (unsigned int i = 0; i < original.size(); i++) {
 		check[i] = 0;
 	}
 
@@ -34,7 +34,7 @@ void purifyCorners(std::vector<cv::Point>& original, double distance) {
 		check[i] = current;
 	}
 
-	for (int i = 0; i < original.size(); i++) {
+	for (unsigned int i = 0; i < original.size(); i++) {
 		if (check[i] == 0) {
 			result.push_back(original.at(i));
 		}
