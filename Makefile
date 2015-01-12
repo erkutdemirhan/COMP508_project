@@ -1,13 +1,13 @@
 all:
-	g++ HashEntryModel.cpp HashKeyModel.cpp HashKeyScene.cpp enh.cpp harris.cpp helperMethods.cpp matching.cpp preprocessor.cpp Comp508_Project.cpp.cpp -o Comp508_Project `pkg-config --libs --cflags opencv` -I./boost_1_57_0 -I./eigen_3_2_3 -O0 -g3 -Wall
+	g++ HashEntryModel.cpp HashKeyModel.cpp HashKeyScene.cpp enh.cpp harris.cpp helperMethods.cpp matching.cpp preprocessor.cpp Comp508_Project.cpp -o Comp508_Project `pkg-config --libs --cflags opencv` -I./boost_1_57_0 -I./eigen_3_2_3 -O0 -g3 -Wall
 	mkdir ./output_images
 
 clean:
-	rm -f Comp508_Project*
+	rm -f Comp508_Project
 	rm -rf ./output_images
 
 test:
-	g++ HashEntryModel.cpp HashKeyModel.cpp HashKeyScene.cpp enh.cpp harris.cpp helperMethods.cpp matching.cpp preprocessor.cpp test.cpp -o Comp508_Project_Test `pkg-config --libs --cflags opencv` -I./boost_1_57_0 -I./eigen_3_2_3 -O0 -g3 -Wall
+	g++ HashEntryModel.cpp HashKeyModel.cpp HashKeyScene.cpp enh.cpp harris.cpp helperMethods.cpp matching.cpp preprocessor.cpp test.cpp -o Comp508_Project `pkg-config --libs --cflags opencv` -I./boost_1_57_0 -I./eigen_3_2_3 -O0 -g3 -Wall
 	mkdir ./output_images
 	
 #	echo "Building file: ./Comp508_Project.cpp"
